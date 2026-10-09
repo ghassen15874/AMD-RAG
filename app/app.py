@@ -16,14 +16,8 @@ SOCKET_PATH = "/tmp/mc3_daemon.sock"
 def ensure_daemon():
     if not os.path.exists(SOCKET_PATH):
         print("Starting daemon...")
-        # Since CMD runs app/daemon.py directly now, it might be running already.
-        # But for queries in a new exec, if the daemon crashed, we can restart it.
-        # Or wait, the instructions say:
-        # "CMD ['python3', '/app/daemon.py']"
-        # So the daemon is started by the container's CMD. 
-        # But if it's not ready yet, we wait. If socket doesn't exist, we start it as fallback.
-        subprocess.Popen([sys.executable, "/app/daemon.py"])
-        # Wait for socket
+        daemon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "daemon.py")
+        subprocess.Popen([sys.executable, daemon_path])
         for _ in range(100):
             if os.path.exists(SOCKET_PATH):
                 break
@@ -53,7 +47,10 @@ def send_request(payload, timeout=25.0):
 
 def index(corpus: Path) -> None:
     INDEX_DIR.mkdir(parents=True, exist_ok=True)
-    send_request({"action": "index", "corpus": str(corpus)}, timeout=600.0)
+    resp = send_request({"action": "index", "corpus": str(corpus)}, timeout=600.0)
+    if "error" in resp:
+        print(f"Daemon error during indexing: {resp['error']}", file=sys.stderr)
+        sys.exit(1)
 
 def answer(corpus: Path, query: str) -> tuple[str, list[str], float]:
     result = {"answer": "", "citations": [], "confidence": 0.0}
