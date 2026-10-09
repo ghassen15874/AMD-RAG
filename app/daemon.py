@@ -15,6 +15,7 @@ from parsers.xlsx_parser import parse_xlsx
 from parsers.csv_parser import parse_csv
 from parsers.txt_parser import parse_txt
 from parsers.py_parser import parse_py
+from parsers.vision_parser import parse_image
 
 SOCKET_PATH = "/tmp/mc3_daemon.sock"
 
@@ -49,7 +50,7 @@ def build_index(corpus_path):
                 elif ext == ".py":
                     chunks = parse_py(str(full_path))
                 elif ext in [".png", ".jpg", ".jpeg"]:
-                    chunks = [{"text": f"Image at {rel_path}", "is_image": True}]
+                    chunks = parse_image(str(full_path))
                 else:
                     print(f"Skipping unknown file type: {rel_path}", flush=True)
                     continue

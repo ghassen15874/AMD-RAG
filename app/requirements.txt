@@ -1,3 +1,7 @@
 pypdf
 python-docx
 openpyxl
+transformers
+accelerate
+pillow
+qwen-vl-utils
