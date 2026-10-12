@@ -1,0 +1,3 @@
+Switching Converter Catalog:
+Module MOD-BUCK-410 has a nominal switching frequency of 750 kHz.
+Module MOD-BOOST-102 has a nominal switching frequency of 500 kHz.

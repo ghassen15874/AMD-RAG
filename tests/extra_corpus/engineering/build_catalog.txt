@@ -1,0 +1,2 @@
+Deployment profile catalog:
+Profile IMG-ROCKY-9 bundles firmware build 8812-B with security fix.

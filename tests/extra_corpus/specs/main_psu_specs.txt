@@ -1,0 +1,1 @@
+Main power supply standby power dissipation: 15W. Full load: 1200W.

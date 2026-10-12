@@ -1,0 +1,1 @@
+Primary processor base clock rate: 2400 MHz. Turbo: 3100 MHz.

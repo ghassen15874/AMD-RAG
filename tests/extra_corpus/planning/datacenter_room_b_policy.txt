@@ -1,0 +1,1 @@
+Server Room B high-density zone HVAC policy. Maximum allowable ambient temperature: 22C.

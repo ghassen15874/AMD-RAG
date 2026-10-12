@@ -1,0 +1,3 @@
+loop_id,subsystem_tag,fluid_type
+loop-cryo-88,SUBSYS-POLAR-3,Fluorinert-FC72
+loop-cryo-12,SUBSYS-AQUA-1,Water-Glycol

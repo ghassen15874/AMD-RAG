@@ -1,0 +1,1 @@
+Auxiliary power supply standby power dissipation: 3.5W. Auxiliary bus: 12V.

@@ -1,0 +1,1 @@
+Server Room A HVAC policy. Maximum allowable ambient temperature: 28C.

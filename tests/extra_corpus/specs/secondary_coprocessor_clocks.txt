@@ -1,0 +1,1 @@
+Secondary coprocessor fixed clock rate: 1600 MHz. Voltage: 0.9V.

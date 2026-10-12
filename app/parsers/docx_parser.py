@@ -23,11 +23,23 @@ def parse_docx(path):
                 
         # Tables
         for table in doc.tables:
-            for row in table.rows:
-                row_data = [cell.text.strip() for cell in row.cells]
-                text = " | ".join(row_data)
-                if text.strip():
-                    chunks.append({"text": text, "source": "table"})
+            table_rows_text = []
+            headers = []
+            for i, row in enumerate(table.rows):
+                row_cells = [cell.text.strip() for cell in row.cells]
+                if i == 0:
+                    headers = row_cells
+                    table_rows_text.append(" | ".join(headers))
+                else:
+                    table_rows_text.append(" | ".join(row_cells))
+                    row_pairs = [
+                        f"{headers[j] if j < len(headers) and headers[j] else f'Col{j}'}: {val}"
+                        for j, val in enumerate(row_cells) if val
+                    ]
+                    if row_pairs:
+                        chunks.append({"text": ", ".join(row_pairs), "source": "table"})
+            if table_rows_text:
+                chunks.append({"text": "\n".join(table_rows_text), "source": "table_full"})
     except Exception as e:
         print(f"Error parsing DOCX {path}: {e}")
     return chunks

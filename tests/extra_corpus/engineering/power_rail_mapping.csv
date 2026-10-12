@@ -1,0 +1,3 @@
+rail_name,converter_module,max_amps
+pwr-rail-55,MOD-BUCK-410,250
+pwr-rail-12,MOD-BOOST-102,120

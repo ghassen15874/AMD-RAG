@@ -1,0 +1,3 @@
+Controller Profile Manifest:
+Profile CTRL-ZEPHYR-7 specifies primary clock multiplier 44X for high-density compute nodes.
+Profile CTRL-BOREAS-2 specifies primary clock multiplier 32X for edge gateway nodes.

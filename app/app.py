@@ -13,18 +13,25 @@ OUTPUT_DIR = Path(os.environ.get("MC2_OUTPUT_DIR", "/app/output"))
 INDEX_DIR = Path(os.environ.get("MC3_INDEX_DIR", "/app/index"))
 SOCKET_PATH = "/tmp/mc3_daemon.sock"
 
-def ensure_daemon():
+def wait_for_daemon():
     if not os.path.exists(SOCKET_PATH):
-        print("Starting daemon...")
-        daemon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "daemon.py")
-        subprocess.Popen([sys.executable, daemon_path])
-        for _ in range(100):
-            if os.path.exists(SOCKET_PATH):
-                break
-            time.sleep(0.1)
+        daemon_py = Path("/app/daemon.py") if Path("/app/daemon.py").is_file() else Path(__file__).parent / "daemon.py"
+        if daemon_py.is_file():
+            subprocess.Popen([sys.executable, str(daemon_py)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    for _ in range(600):
+        if os.path.exists(SOCKET_PATH):
+            try:
+                # Try connecting to see if it's actually listening
+                with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+                    s.connect(SOCKET_PATH)
+                return
+            except ConnectionRefusedError:
+                pass
+        time.sleep(0.1)
+    print("Timeout waiting for daemon socket.", file=sys.stderr)
 
 def send_request(payload, timeout=25.0):
-    ensure_daemon()
+    wait_for_daemon()
     client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     client.settimeout(timeout)
     client.connect(SOCKET_PATH)

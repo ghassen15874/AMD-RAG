@@ -78,38 +78,45 @@ OUTPUT_DIR = Path(os.environ.get("MC2_OUTPUT_DIR", "/app/output"))
 INDEX_DIR = Path(os.environ.get("MC3_INDEX_DIR", "/app/index"))
 
 
+import socket
+import time
+import os
+
+def wait_for_daemon():
+    SOCKET_PATH = "/tmp/mc3_daemon.sock"
+    for _ in range(60):
+        if os.path.exists(SOCKET_PATH):
+            break
+        time.sleep(1)
+
+def send_to_daemon(payload):
+    wait_for_daemon()
+    SOCKET_PATH = "/tmp/mc3_daemon.sock"
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+        s.connect(SOCKET_PATH)
+        s.sendall(json.dumps(payload).encode("utf-8"))
+        s.shutdown(socket.SHUT_WR)
+        
+        data = b""
+        while True:
+            chunk = s.recv(4096)
+            if not chunk:
+                break
+            data += chunk
+        return json.loads(data.decode("utf-8"))
+
 def index(corpus: Path) -> None:
-    """Build and PERSIST whatever you need to answer questions later.
-
-    Called once, before any question, with the corpus root. Anything you write
-    under INDEX_DIR survives into the per-question invocations; anything you
-    keep only in memory does not, because each question is a new process.
-
-    The corpus is a directory tree of mixed types -- pdf, docx, xlsx, csv, txt,
-    log, py, png, jpg -- and EVERY type holds at least one graded answer, so
-    skipping a format silently costs you the questions that depend on it. Two
-    of the ten questions are answerable only by looking at an image.
-
-    Walk defensively: catch per-file, keep going, and record what you could not
-    read rather than aborting. See the third bullet in the module docstring.
-    """
     INDEX_DIR.mkdir(parents=True, exist_ok=True)
-    # Your work goes here.
+    send_to_daemon({"action": "index", "corpus": str(corpus)})
 
 
 def answer(corpus: Path, query: str) -> tuple[str, list[str], float]:
-    """Return (answer, citations, confidence) for ONE question.
-
-    THIS is what you replace. `citations` are paths relative to `corpus`, using
-    forward slashes -- "specs/tq40_datasheet_r2.pdf", not an absolute path and
-    not a bare filename.
-
-    Return ("", [], 0.0) to refuse. Refusing correctly scores full marks on the
-    question that has no answer in the corpus, and refusing on a question that
-    does have one scores the same as a wrong guess -- so refusal is safe to use
-    honestly and useless to use defensively.
-    """
-    return "", [], 0.0
+    try:
+        resp = send_to_daemon({"action": "query", "corpus": str(corpus), "query": query})
+        return resp.get("answer", ""), resp.get("citations", []), resp.get("confidence", 0.0)
+    except Exception as e:
+        print("Daemon query error:", e)
+        return "", [], 0.0
 
 
 def main() -> int:

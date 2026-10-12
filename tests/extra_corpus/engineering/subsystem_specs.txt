@@ -1,0 +1,3 @@
+Subsystem Specification Index:
+Subsystem SUBSYS-POLAR-3 maximum operating pressure rating is 620 kPa.
+Subsystem SUBSYS-AQUA-1 maximum operating pressure rating is 450 kPa.

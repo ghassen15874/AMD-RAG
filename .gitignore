@@ -169,3 +169,20 @@ cython_debug/
 
 # Unreadable files
 mc3-corpus/vendor/internal_audit.txt
+
+# Large model weights (keep folder via .gitkeep)
+models/**
+!models/.gitkeep
+
+# Evaluation and mount artifacts
+index_mount/
+eval_output/
+eval_output_clean/
+index_clean/
+tests/extra_index/
+tests/extra_index_mount/
+tests/extra_output/
+clean_venv/
+.vlm_cache/
+vision_cache.json
+

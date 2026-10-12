@@ -1,0 +1,475 @@
+{
+  "challenge": "mini-challenge-3",
+  "description": "Extra stress test suite with 42 questions across all edge cases.",
+  "corpus": "tests/extra_corpus",
+  "queries": [
+    {
+      "n": 1,
+      "query": "What is the maximum TDP of the accelerator v3?",
+      "expected_answer": "350",
+      "expected_citations": [
+        "specs/accelerator_v3_r1.pdf"
+      ],
+      "category": "swapped revision trap"
+    },
+    {
+      "n": 2,
+      "query": "What is the core voltage specification for the TQ-80 board?",
+      "expected_answer": "0.85",
+      "expected_citations": [
+        "specs/tq80_power_spec_revA.pdf"
+      ],
+      "category": "swapped revision trap"
+    },
+    {
+      "n": 3,
+      "query": "What is the recommended airflow in CFM for the TQ-50 chassis?",
+      "expected_answer": "85",
+      "expected_citations": [
+        "specs/tq50_thermal_guidelines_v3.pdf"
+      ],
+      "category": "superseded revision trap"
+    },
+    {
+      "n": 4,
+      "query": "What is the host interface width for the TQ-30 controller?",
+      "expected_answer": "x8",
+      "answer_aliases": [
+        "x8 PCIe Gen5",
+        "PCIe Gen5",
+        "x8"
+      ],
+      "expected_citations": [
+        "specs/tq30_architecture_current.pdf"
+      ],
+      "category": "deprecated revision trap"
+    },
+    {
+      "n": 5,
+      "query": "What is the hardware capex budget for the TQ-90 compute cluster?",
+      "expected_answer": "3200000",
+      "expected_citations": [
+        "planning/capex_budget_tq90.txt"
+      ],
+      "category": "decoy value trap"
+    },
+    {
+      "n": 6,
+      "query": "What is the standby power dissipation of the auxiliary power supply?",
+      "expected_answer": "3.5",
+      "expected_citations": [
+        "specs/auxiliary_psu_specs.txt"
+      ],
+      "category": "decoy value trap"
+    },
+    {
+      "n": 7,
+      "query": "What is the maximum allowable ambient temperature in Server Room B?",
+      "expected_answer": "22",
+      "expected_citations": [
+        "planning/datacenter_room_b_policy.txt"
+      ],
+      "category": "decoy zone trap"
+    },
+    {
+      "n": 8,
+      "query": "What is the target clock rate of the secondary coprocessor?",
+      "expected_answer": "1600",
+      "expected_citations": [
+        "specs/secondary_coprocessor_clocks.txt"
+      ],
+      "category": "decoy processor trap"
+    },
+    {
+      "n": 9,
+      "query": "What is the vendor serial number of the asset replaced in incident INC-9901?",
+      "expected_answer": "SN-8849-X",
+      "expected_citations": [
+        "support/asset_registry.csv",
+        "support/batch_manifest.xlsx"
+      ],
+      "category": "3-hop chain"
+    },
+    {
+      "n": 10,
+      "query": "Which listen port is configured for the module that failed in cluster K8S-EAST?",
+      "expected_answer": "9092",
+      "expected_citations": [
+        "engineering/config_map.csv",
+        "engineering/router_settings.txt",
+        "logs/deploy_error.log"
+      ],
+      "category": "3-hop chain"
+    },
+    {
+      "n": 11,
+      "query": "What is the warranty tier for the chassis delivered on PO-55102?",
+      "expected_answer": "Gold-24x7",
+      "expected_citations": [
+        "support/orders.csv",
+        "support/shipments.txt",
+        "support/warranty_tiers.csv"
+      ],
+      "category": "3-hop chain"
+    },
+    {
+      "n": 12,
+      "query": "What is the firmware build number installed on the host reporting GPU PCIe link degradation?",
+      "expected_answer": "8812-B",
+      "expected_citations": [
+        "engineering/build_catalog.txt",
+        "engineering/inventory_hosts.csv",
+        "logs/pcie_telemetry.log"
+      ],
+      "category": "3-hop chain"
+    },
+    {
+      "n": 13,
+      "query": "What is the part SKU for the high-pressure coolant pump?",
+      "expected_answer": "PMP-9942-C",
+      "expected_citations": [
+        "support/rma_extended.xlsx"
+      ],
+      "category": "second xlsx sheet"
+    },
+    {
+      "n": 14,
+      "query": "What is the lead time in days for the high-pressure coolant pump?",
+      "expected_answer": "45",
+      "expected_citations": [
+        "support/rma_extended.xlsx"
+      ],
+      "category": "second xlsx sheet"
+    },
+    {
+      "n": 15,
+      "query": "What is the minimum operating temperature in Celsius for the optical transceiver?",
+      "expected_answer": "-20",
+      "expected_citations": [
+        "support/component_matrix.xlsx"
+      ],
+      "category": "second xlsx sheet"
+    },
+    {
+      "n": 16,
+      "query": "What is the test duration in hours for the burn-in cycle in the qualification sheet?",
+      "expected_answer": "168",
+      "expected_citations": [
+        "support/component_matrix.xlsx"
+      ],
+      "category": "second xlsx sheet"
+    },
+    {
+      "n": 17,
+      "query": "What is the target clock frequency in MHz of the Matrix Engine?",
+      "expected_answer": "1850",
+      "expected_citations": [
+        "planning/spec_matrix.docx"
+      ],
+      "category": "docx table"
+    },
+    {
+      "n": 18,
+      "query": "What is the power target in Watts for the Vector Core?",
+      "expected_answer": "95",
+      "expected_citations": [
+        "planning/spec_matrix.docx"
+      ],
+      "category": "docx table"
+    },
+    {
+      "n": 19,
+      "query": "What is the target clock frequency in MHz for the L3 cache tile?",
+      "expected_answer": "3200",
+      "expected_citations": [
+        "planning/spec_matrix.docx"
+      ],
+      "category": "docx table"
+    },
+    {
+      "n": 20,
+      "query": "What is the target clock frequency in MHz of the Host Memory Controller?",
+      "expected_answer": "512",
+      "expected_citations": [
+        "planning/spec_matrix.docx"
+      ],
+      "category": "docx table"
+    },
+    {
+      "n": 21,
+      "query": "What is the part number of the PCIe bracket?",
+      "expected_answer": "BKT-5521-A",
+      "expected_citations": [
+        "specs/pcie_bracket.png"
+      ],
+      "category": "image vision png"
+    },
+    {
+      "n": 22,
+      "query": "What is the warranty code printed on the warranty sticker?",
+      "expected_answer": "W-99120-X",
+      "expected_citations": [
+        "support/warranty_sticker.jpg"
+      ],
+      "category": "image vision jpg"
+    },
+    {
+      "n": 23,
+      "query": "What is the ASSY SN on the motherboard traceability label?",
+      "expected_answer": "MB-2026-9041",
+      "expected_citations": [
+        "support/motherboard_barcode.png"
+      ],
+      "category": "image vision png"
+    },
+    {
+      "n": 24,
+      "query": "What is the inspection stamp ID on the heatsink badge?",
+      "expected_answer": "QC-PASS-77",
+      "expected_citations": [
+        "support/heatsink_badge.jpg"
+      ],
+      "category": "image vision jpg"
+    },
+    {
+      "n": 25,
+      "query": "What is the configured retry limit in the network daemon?",
+      "expected_answer": "12",
+      "expected_citations": [
+        "engineering/network_daemon.py"
+      ],
+      "category": "python constant comment trap"
+    },
+    {
+      "n": 26,
+      "query": "What is the socket timeout in seconds in the network daemon?",
+      "expected_answer": "75",
+      "expected_citations": [
+        "engineering/network_daemon.py"
+      ],
+      "category": "python constant comment trap"
+    },
+    {
+      "n": 27,
+      "query": "What is the worker thread pool size in the event processor?",
+      "expected_answer": "32",
+      "expected_citations": [
+        "engineering/event_processor.py"
+      ],
+      "category": "python constant comment trap"
+    },
+    {
+      "n": 28,
+      "query": "What is the heartbeat interval in seconds in the event processor?",
+      "expected_answer": "25",
+      "expected_citations": [
+        "engineering/event_processor.py"
+      ],
+      "category": "python constant comment trap"
+    },
+    {
+      "n": 29,
+      "query": "What is the penalty fee percentage specified in the supplier agreement?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "encrypted refusal"
+    },
+    {
+      "n": 30,
+      "query": "What is the minimum annual purchase volume in the supplier agreement?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "encrypted refusal"
+    },
+    {
+      "n": 31,
+      "query": "What is the arbitration jurisdiction named in the encrypted vendor contract?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "encrypted refusal"
+    },
+    {
+      "n": 32,
+      "query": "What is the late delivery credit percentage in the encrypted supplier agreement?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "encrypted refusal"
+    },
+    {
+      "n": 33,
+      "query": "What is the internal clock jitter specification for the TQ-999?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "unanswerable refusal"
+    },
+    {
+      "n": 34,
+      "query": "What is the shipping weight of the pallet delivery for order 99281?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "unanswerable refusal"
+    },
+    {
+      "n": 35,
+      "query": "Which quantum encryption algorithm is used by the Meridian cluster?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "unanswerable refusal"
+    },
+    {
+      "n": 36,
+      "query": "What is the chemical purity rating of the thermal interface paste?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "unanswerable refusal"
+    },
+    {
+      "n": 37,
+      "query": "Which firmware release addressed the PCIe doorbell hang under small-batch load?",
+      "expected_answer": "4.3.1",
+      "expected_citations": [
+        "engineering/meridian_release_notes.txt",
+        "support/bug_database.csv"
+      ],
+      "category": "text search"
+    },
+    {
+      "n": 38,
+      "query": "What is the maximum junction temperature of the TQ-40?",
+      "expected_answer": "94",
+      "expected_citations": [
+        "specs/tq40_datasheet_r2.pdf"
+      ],
+      "category": "superseded trap baseline"
+    },
+    {
+      "n": 39,
+      "query": "What board revision is printed on the asset label?",
+      "expected_answer": "REV-C2",
+      "expected_citations": [
+        "support/asset_label.jpg"
+      ],
+      "category": "multimodal baseline"
+    },
+    {
+      "n": 40,
+      "query": "What error code is logged when the thermal throttle engages?",
+      "expected_answer": "E7731",
+      "expected_citations": [
+        "logs/prod_inference_2026-09-02.log"
+      ],
+      "category": "log baseline"
+    },
+    {
+      "n": 41,
+      "query": "What is the maximum junction temperature of the TQ-10?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "withdrawn only refusal"
+    },
+    {
+      "n": 42,
+      "query": "What is the memory size in GiB reported in the telemetry dump file?",
+      "expected_answer": "",
+      "expected_citations": [],
+      "category": "unknown binary refusal"
+    },
+    {
+      "n": 43,
+      "query": "What is the primary clock multiplier configured for the worker node that encountered an uncorrectable multi-bit ECC error?",
+      "expected_answer": "44X",
+      "expected_citations": [
+        "engineering/cluster_topology.csv",
+        "engineering/controller_manifest.txt",
+        "logs/memory_telemetry.log"
+      ],
+      "category": "unnamed entity multi-hop chain"
+    },
+    {
+      "n": 44,
+      "query": "What is the maximum operating pressure rating in kPa of the subsystem associated with the refrigeration loop that suffered tachometer signal loss?",
+      "expected_answer": "620",
+      "expected_citations": [
+        "engineering/cooling_assignments.csv",
+        "engineering/subsystem_specs.txt",
+        "logs/cooling_monitor.log"
+      ],
+      "category": "unnamed entity multi-hop chain"
+    },
+    {
+      "n": 45,
+      "query": "What is the nominal switching frequency in kHz of the converter module powering the distribution rail that experienced transient voltage droop?",
+      "expected_answer": "750",
+      "expected_citations": [
+        "engineering/converter_catalog.txt",
+        "engineering/power_rail_mapping.csv",
+        "logs/voltage_regulator.log"
+      ],
+      "category": "unnamed entity multi-hop chain"
+    },
+    {
+      "n": 46,
+      "query": "What is the maximum TDP of the accelerator v3?",
+      "expected_answer": "350",
+      "expected_citations": [
+        "specs/accelerator_v3_r1.pdf"
+      ],
+      "category": "decoy memo value suppression"
+    },
+    {
+      "n": 47,
+      "query": "What is the maximum allowable ambient temperature in Server Room B?",
+      "expected_answer": "22",
+      "expected_citations": [
+        "planning/datacenter_room_b_policy.txt"
+      ],
+      "category": "decoy memo value suppression"
+    },
+    {
+      "n": 48,
+      "query": "What is the recommended airflow in CFM for the TQ-50 chassis?",
+      "expected_answer": "85",
+      "expected_citations": [
+        "specs/tq50_thermal_guidelines_v3.pdf"
+      ],
+      "category": "decoy memo value suppression"
+    },
+    {
+      "n": 49,
+      "query": "What is the standby power dissipation of the auxiliary power supply?",
+      "expected_answer": "3.5",
+      "expected_citations": [
+        "specs/auxiliary_psu_specs.txt"
+      ],
+      "category": "decoy memo value suppression"
+    },
+    {
+      "n": 50,
+      "query": "What is the core voltage specification for the TQ-80 board?",
+      "expected_answer": "0.85",
+      "expected_citations": [
+        "specs/tq80_power_spec_revA.pdf"
+      ],
+      "category": "decoy memo value suppression"
+    },
+    {
+      "n": 51,
+      "query": "What is the target clock rate of the secondary coprocessor?",
+      "expected_answer": "1600",
+      "expected_citations": [
+        "specs/secondary_coprocessor_clocks.txt"
+      ],
+      "category": "decoy memo value suppression"
+    },
+    {
+      "n": 52,
+      "query": "What is the default batch timeout, in seconds, in the ingest service?",
+      "expected_answer": "180",
+      "expected_citations": [
+        "engineering/ingest_service.py"
+      ],
+      "category": "decoy memo value suppression"
+    }
+  ],
+  "seed": 42
+}
